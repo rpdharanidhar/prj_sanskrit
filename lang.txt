@@ -1,0 +1,3 @@
+Country :  ISO code
+English :  'en'
+German  :  'de'

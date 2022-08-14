@@ -1,0 +1,100 @@
+<MyLabel@Label>
+    size_hint:[None, None]
+    size: self.texture_size
+<MyTextField@TextInput>
+    size_hint:[0.3, 0.4]
+<LangButton@Button>
+    background_normal: ''
+    color: [0,0,0,1]
+    size:(.5,.7)
+    size_hint:[None, None]
+    pos_hint:{"center_x":0.5}
+    height: 50
+    width: 120
+FloatLayout:
+    canvas.before:
+        Color:
+            rgba:[0,0,1,0]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MyLabel:
+        text:"Language Translator "
+        pos_hint: {"center_x":0.5,"top":0.95}
+        font_size: '60sp'
+        font_name: "Comic"
+        color: [1,1,1,1]
+    MyLabel:
+        text: "From"
+        pos_hint: {"center_x":0.2, "top":0.8}
+        font_size: '30sp'
+        font_name: "Comic"
+        color: [1,1,1,1]
+    MyLabel:
+        text: "To"
+        pos_hint: {"center_x":0.8, "top":0.8}
+        font_size: '30sp'
+        font_name: "Comic"
+        color: [1,1,1,1]
+    MyTextField:
+        id: field1
+        size: root.width,root.height
+        pos_hint: {"center_x":0.2, "top":0.7}
+    MyTextField:
+        id: field2
+        size: root.width,root.height
+        pos_hint: {"center_x":0.8, "top":0.7}
+    BoxLayout:
+        size: root.width,root.height
+        pos_hint: {"center_x":0.94, 'y':0.1}
+        orientation: 'horizontal'
+        LangButton:
+            text: 'Change'
+            background_color:[1,0,0,0.6]
+            on_release:
+                app.translate_to('de', field1.text)
+
+    BoxLayout:
+        orientation:'vertical'
+        size: root.width,root.height
+        padding: 50
+        spacing: 20
+        Button:
+            size_hint: [None,None]
+            size: 150,100
+            background_color: 0,0,0,0
+            pos_hint:{'x':.1,'y':.7}
+            on_press : root.hello_on()
+            Image:
+                source:'images/giphy.gif'
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+    BoxLayout:
+        orientation:'vertical'
+        size: root.width,root.height
+        padding: 50
+        spacing: 20
+        Button:
+            size_hint: [None,None]
+            size: 150,100
+            background_color: 0,0,0,0
+            pos_hint:{'x':.8,'y':.7}
+            on_release: root.hello_on()
+            Image:
+                source:'images/giphy.gif'
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+
+
+
+
+
+
+
+
+
+
+
+
+
+
