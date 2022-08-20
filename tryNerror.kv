@@ -1,0 +1,15 @@
+TextInput:
+
+    id:ism
+
+    size_hint:0.7,0.2
+
+    multiline: False
+
+    font_size:20
+
+    on_text_validate:
+
+        app.puko()
+
+    on_focus: root._on_keyboard_down(self)

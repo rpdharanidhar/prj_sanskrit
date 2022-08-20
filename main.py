@@ -1,7 +1,7 @@
 import pyttsx3
 from plyer import tts
 from translate import Translator as Tr, translate
-import content as content
+# import content as content
 import kivy
 from kivy.core.window import Window
 from kivy.uix.button import Button

@@ -1,7 +1,13 @@
+from self import self
 from translate import Translator as Tr, translate
+import linkgen,sel
 import kivy
+import cv2
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+import word_lib
+import fontstyle
+import tts
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty, StringProperty
@@ -16,51 +22,78 @@ import word_lib
 from googletrans import Translator
 import pyttsx3 as tts
 import tts
+import sqlite3
+
+
 translator = Translator()
 # create the recognizer
 r = sr.Recognizer()
 class MainWindow(Screen):
-    '''def Change(self):
-        sp.main()
-
+    m = 0
     def release(self):
-        self.ids.mnm.text = "Start to speak..."'''
+
+        SecondWindow.start(self)
+
 class SecondWindow(Screen):
-    mic = sr.Microphone(device_index=0)
-    with mic as source:
-        print("start now")
-        audio = r.listen(source, phrase_time_limit=10)
-        print("stop now")
+    #result = "Start"
+    def start(self):
 
-    try:
+        mic = sr.Microphone(device_index=0)
+        with mic as source:
+            print("start now")
+            audio = r.listen(source)
+            # print("stop now")
+
+        # speech recognition
+
         result = r.recognize_google(audio)
-    except sr.RequestError:
-        # API was unreachable or unresponsive
-        exit("API is unreachable")
-    # except KeyboardInterrupt:
-    #     print("Audio Recorded")
-    except sr.UnknownValueError:
-        # speech was unintelligible
-        exit("Unable to recognize speech! Were you speaking")
 
-    # speech recognition
-    result = r.recognize_google(audio)
+        # export the result
+        print(result)
+        f = open("Lang.txt", "w+")
+        f.write(result)
+        f.close()
 
-    # export the result
-    print(result)
+        # ThirdWindow.proper(self)
 
-    def StopRec(self):
-        pass
-
+    # def StopRec(self):
+    #     ThirdWindow.enters(self)
+    #     print(result)
 class ThirdWindow(Screen):
-    def translate_to(self, lang, content):
-        field = self.root.ids['field2']
-        translator = Tr(to_lang=lang)
-        translation = translator.translate(content)
-        field.text = translation
+    #a = SecondWindow.result
 
-    def hello_on(self):
-        self.ids.field1.text = 'helo'
+    # proper(self)
+    def proper(self):
+        # self.ids.field1.text = "Start to speak..."
+        f = open("lang.txt", 'r')
+        a = f.readlines()
+
+        for i in a:
+            b = a[0]
+        print(b)
+        self.ids.field1.text  = b
+
+    def translate(self):
+        to_trans = self.ids.field1.text
+        link = linkgen. link(to_trans)
+        sele = sel.sel(link)
+        print(sele)
+        # text = "भवतः दिवसः अस्ति"
+        # rr = text.decode("utf-8"),font_name = 'SANSKRIT.ttf',x = 57
+
+        self.ids.field2.text =sele
+
+    def eng_speak(self):
+        tts.text_to_speech(self.ids.field1.text)
+
+    def san_speak(self, fonts1=word_lib):
+        sansglish = word_lib.words_change(self.ids.field2.text)
+        print(sansglish)
+        tts.text_to_speech(sansglish)
+        fonts1.print(sansglish)
+
+
+
 
 class WindowManager(ScreenManager):
     pass

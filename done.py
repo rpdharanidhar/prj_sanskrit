@@ -1,3 +1,4 @@
+import fontstyle
 import speech_recognition as sr
 from googletrans import Translator
 
@@ -18,7 +19,7 @@ print("Start speaking")
 # record your speech
 with mic as source:
     print("start now")
-    audio = r.listen(source, phrase_time_limit=10)
+    audio = r.listen(source,phrase_time_limit=10)
     print("stop now")
 
 
@@ -44,11 +45,12 @@ with open('my_speech.txt', mode='w') as file:
 print("The audio has been stored.")
 
 link=linkgen.link(result)
-sel = sel.sel(link)
+sel=sel.sel(link)
 print(sel)
 sansglish = word_lib.words_change(sel)
 print(sansglish)
 tts.text_to_speech(sansglish)
+fontstyle.print(sansglish)
 
 #translator.detect(sel)
 #playsound in sanskrit

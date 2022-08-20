@@ -1,3 +1,1 @@
-Country :  ISO code
-English :  'en'
-German  :  'de'
+hello how are you
