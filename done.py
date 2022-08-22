@@ -6,6 +6,7 @@ import linkgen
 import sel
 import tts
 import word_lib
+import cv2
 
 translator = Translator()
 # create the recognizer
